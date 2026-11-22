@@ -161,11 +161,51 @@ export default function EmployeeApp() {
 
   return (
     <div className="min-h-screen bg-[#050b14] text-white flex flex-col font-sans relative overflow-x-hidden p5-dots select-none">
-      {/* Background Persona 3 Cool Blue Glows */}
+      {/* Dynamic Animated Background Layers */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
-        <div className="absolute -top-32 -left-32 w-96 h-96 bg-[#0072ff]/20 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 -right-40 w-[500px] h-[500px] bg-[#00d2ff]/10 rounded-full blur-3xl" />
-        <div className="absolute top-0 right-1/4 w-32 h-[120%] bg-[#0072ff]/5 -rotate-12 transform origin-top pointer-events-none" />
+        {/* Animated Flowing Diagonal Stripes */}
+        <div className="absolute inset-0 p5-stripes-animated opacity-60" />
+
+        {/* Ambient Floating Glow Orbs */}
+        <motion.div
+          animate={{
+            x: [0, 40, -30, 0],
+            y: [0, -50, 30, 0],
+            scale: [1, 1.15, 0.95, 1],
+          }}
+          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -top-32 -left-32 w-[420px] h-[420px] bg-[#0072ff]/25 rounded-full blur-[90px]"
+        />
+
+        <motion.div
+          animate={{
+            x: [0, -50, 40, 0],
+            y: [0, 60, -40, 0],
+            scale: [1, 1.2, 0.9, 1],
+          }}
+          transition={{ duration: 22, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          className="absolute top-1/2 -right-40 w-[550px] h-[550px] bg-[#00d2ff]/15 rounded-full blur-[100px]"
+        />
+
+        <motion.div
+          animate={{
+            x: [0, 30, -20, 0],
+            y: [0, 40, -30, 0],
+            opacity: [0.15, 0.25, 0.15],
+          }}
+          transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-10 left-1/3 w-[350px] h-[350px] bg-[#0055c4]/20 rounded-full blur-[80px]"
+        />
+
+        {/* Slanted Kinetic Graphic Beam */}
+        <motion.div 
+          animate={{
+            x: ["-10%", "10%", "-10%"],
+            opacity: [0.04, 0.08, 0.04]
+          }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -top-20 right-1/4 w-40 h-[150%] bg-gradient-to-b from-[#00d2ff] via-[#0072ff] to-transparent -rotate-12 transform origin-top pointer-events-none" 
+        />
       </div>
 
       {/* TOP BAR: Header SUARAKAN */}

@@ -10,30 +10,32 @@
   }
 }
 
-/* Halftone dot pattern background - Persona 3 Moonlight Blue */
+/* Halftone dot pattern background - Persona 3 Moonlight Blue with animated pulse */
 .p5-dots {
-  background-image: radial-gradient(rgba(0, 114, 255, 0.15) 1.5px, transparent 1.5px);
-  background-size: 16px 16px;
+  background-image: radial-gradient(rgba(0, 114, 255, 0.18) 1.5px, transparent 1.5px);
+  background-size: 18px 18px;
 }
 
-.p5-stripes {
+/* Animated Flowing Diagonal Stripes */
+.p5-stripes-animated {
   background: repeating-linear-gradient(
     -45deg,
-    rgba(255, 255, 255, 0.03),
-    rgba(255, 255, 255, 0.03) 10px,
-    transparent 10px,
-    transparent 20px
+    rgba(0, 114, 255, 0.04),
+    rgba(0, 114, 255, 0.04) 15px,
+    transparent 15px,
+    transparent 30px
   );
+  background-size: 200% 200%;
+  animation: p5-stripe-flow 25s linear infinite;
 }
 
-.p5-stripes-blue {
-  background: repeating-linear-gradient(
-    -45deg,
-    #0072ff,
-    #0072ff 14px,
-    #0055c4 14px,
-    #0055c4 28px
-  );
+@keyframes p5-stripe-flow {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
 }
 
 /* Persona 3 Dynamic Angles */
