@@ -9,8 +9,9 @@ function createWindow() {
     height: 780,
     minWidth: 800,
     minHeight: 650,
-    title: 'Kotak Saran Karyawan (100% Anonim)',
-    backgroundColor: '#020617', // slate-950
+    title: 'SUARAKAN - Kotak Saran & Aspirasi Karyawan (100% Anonim)',
+    icon: path.join(__dirname, 'public', 'suarakan-icon.png'),
+    backgroundColor: '#050b14',
     autoHideMenuBar: true,
     webPreferences: {
       nodeIntegration: false,
