@@ -496,9 +496,8 @@ export default function EmployeeApp({ navigateTo, currentView = 'employee' }) {
                   />
                 </div>
 
-                {/* Submit Action Button & Security Micro-badge */}
+                {/* Submit Action Button */}
                 <div className="pt-2">
-                  {/* Requirement 2: Solid white bg (#FFFFFF), bold dark text (#0B0E14), hard offset shadow #0066FF, translate hover */}
                   <button
                     type="submit"
                     disabled={isSubmitting}
@@ -513,16 +512,6 @@ export default function EmployeeApp({ navigateTo, currentView = 'employee' }) {
                       </>
                     )}
                   </button>
-
-                  {/* Requirement 4: Security Micro-badge directly below Submit button */}
-                  <div className="flex flex-col sm:flex-row items-center justify-center gap-2 pt-3.5 text-[11px] font-mono text-zinc-400">
-                    <div className="flex items-center gap-1.5 px-3 py-1 bg-[#050b14] border border-zinc-800 text-zinc-300">
-                      <ShieldCheck className="w-3.5 h-3.5 text-[#0066FF] shrink-0" />
-                      <span className="font-bold tracking-wider text-[10px] text-zinc-200">ZERO-IP-TRACE // 100% ENCRYPTED ANON</span>
-                    </div>
-                    <span className="hidden sm:inline text-zinc-600">•</span>
-                    <span className="text-[10px] text-[#9CA3AF]">Tanpa Tracking • Tanpa Cookie • Zero Telemetri</span>
-                  </div>
                 </div>
               </form>
             </motion.div>
