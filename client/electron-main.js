@@ -9,7 +9,7 @@ function createWindow() {
     height: 780,
     minWidth: 800,
     minHeight: 650,
-    title: 'SUARAKAN - Kotak Saran & Aspirasi Karyawan (100% Anonim)',
+    title: 'SUARAKAN',
     icon: path.join(__dirname, 'public', 'suarakan-icon.png'),
     backgroundColor: '#050b14',
     autoHideMenuBar: true,
