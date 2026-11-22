@@ -180,7 +180,7 @@ export default function EmployeeApp() {
             SUARAKAN
           </div>
           <div className="font-black text-sm md:text-base tracking-tight uppercase italic text-black drop-shadow-[1px_1px_0px_#fff]">
-            SISTEM USULAN & ASPIRASI RAHASIA KARYAWAN <span className="text-white text-[11px] font-mono not-italic bg-black px-2 py-0.5 ml-1">100% ANONIM</span>
+            SISTEM USULAN & ASPIRASI RAHASIA KARYAWAN
           </div>
         </motion.div>
 
