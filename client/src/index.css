@@ -10,10 +10,21 @@
   }
 }
 
-/* Halftone dot pattern background - Persona 3 Moonlight Blue with animated pulse */
+/* Halftone dot pattern background - Persona 3 Moonlight Blue with animated continuous drift */
 .p5-dots {
-  background-image: radial-gradient(rgba(0, 114, 255, 0.18) 1.5px, transparent 1.5px);
+  background-image: radial-gradient(rgba(0, 130, 255, 0.42) 1.5px, transparent 1.5px);
   background-size: 18px 18px;
+  animation: p5-dot-drift 22s linear infinite;
+  will-change: background-position;
+}
+
+@keyframes p5-dot-drift {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 72px 72px;
+  }
 }
 
 /* Animated Flowing Diagonal Stripes - Super Gentle & Subtle */
