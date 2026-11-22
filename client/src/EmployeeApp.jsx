@@ -163,10 +163,10 @@ export default function EmployeeApp({ navigateTo, currentView = 'employee' }) {
 
   return (
     <div className="min-h-screen bg-[#050b14] text-white flex flex-col font-sans relative overflow-x-hidden p5-dots select-none">
-      {/* Dynamic Animated Background Layers */}
+      {/* Dynamic Animated Background Layers (High-Contrast Cobalt Beams) */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
         {/* Animated Flowing Diagonal Stripes */}
-        <div className="absolute inset-0 p5-stripes-animated opacity-60" />
+        <div className="absolute inset-0 p5-stripes-animated opacity-40" />
 
         {/* Ambient Floating Glow Orbs */}
         <motion.div
@@ -176,37 +176,39 @@ export default function EmployeeApp({ navigateTo, currentView = 'employee' }) {
             scale: [1, 1.15, 0.95, 1],
           }}
           transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -top-32 -left-32 w-[420px] h-[420px] bg-[#0066FF]/25 rounded-full blur-[90px]"
+          className="absolute -top-32 -left-32 w-[500px] h-[500px] bg-[#0066FF]/35 rounded-full blur-[100px]"
         />
 
+        {/* Left Prominent Cobalt Diagonal Beam (Matches reference image) */}
         <motion.div
           animate={{
-            x: [0, -50, 40, 0],
-            y: [0, 60, -40, 0],
-            scale: [1, 1.2, 0.9, 1],
+            x: ["-5%", "8%", "-5%"],
+            y: ["-3%", "4%", "-3%"],
+            opacity: [0.75, 1, 0.75],
           }}
-          transition={{ duration: 22, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-          className="absolute top-1/2 -right-40 w-[550px] h-[550px] bg-[#00d2ff]/15 rounded-full blur-[100px]"
+          transition={{ duration: 11, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -top-24 -left-12 sm:left-4 w-56 sm:w-80 h-[170%] bg-gradient-to-r from-transparent via-[#0066FF]/50 to-transparent -rotate-[18deg] blur-[30px] transform origin-top pointer-events-none"
         />
 
-        <motion.div
-          animate={{
-            x: [0, 30, -20, 0],
-            y: [0, 40, -30, 0],
-            opacity: [0.15, 0.25, 0.15],
-          }}
-          transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-10 left-1/3 w-[350px] h-[350px] bg-[#0055c4]/20 rounded-full blur-[80px]"
-        />
-
-        {/* Slanted Kinetic Graphic Beam */}
+        {/* Right Wide Kinetic Graphic Beam (Matches reference image) */}
         <motion.div 
           animate={{
-            x: ["-10%", "10%", "-10%"],
-            opacity: [0.04, 0.08, 0.04]
+            x: ["5%", "-6%", "5%"],
+            y: ["3%", "-4%", "3%"],
+            opacity: [0.7, 0.95, 0.7]
           }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -top-20 right-1/4 w-40 h-[150%] bg-gradient-to-b from-[#00d2ff] via-[#0066FF] to-transparent -rotate-12 transform origin-top pointer-events-none" 
+          transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -top-20 right-[-40px] sm:right-[6%] w-72 sm:w-96 h-[170%] bg-gradient-to-r from-transparent via-[#0066FF]/40 to-transparent -rotate-[17deg] blur-[36px] transform origin-top pointer-events-none" 
+        />
+
+        {/* Central Ambient Sweeping Beam */}
+        <motion.div
+          animate={{
+            x: ["-15%", "15%", "-15%"],
+            opacity: [0.2, 0.55, 0.2]
+          }}
+          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -top-24 left-[30%] w-44 sm:w-60 h-[170%] bg-gradient-to-r from-transparent via-[#00a2ff]/30 to-transparent -rotate-[19deg] blur-[28px] transform origin-top pointer-events-none"
         />
       </div>
 
