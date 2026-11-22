@@ -57,9 +57,9 @@ export default function App() {
               animate={{ x: 0, skewX: -6 }}
               exit={{ x: "100%", skewX: 12 }}
               transition={{ type: "spring", stiffness: 240, damping: 22 }}
-              className="bg-[#0072ff] text-white border-2 sm:border-4 border-white px-5 sm:px-16 py-3 sm:py-4 shadow-[4px_4px_0px_#000] sm:shadow-[8px_8px_0px_#000] flex items-center gap-2 sm:gap-4 max-w-[90vw]"
+              className="bg-[#0066FF] text-white border-2 sm:border-4 border-white px-5 sm:px-16 py-3 sm:py-4 shadow-[4px_4px_0px_#000] sm:shadow-[8px_8px_0px_#000] flex items-center gap-2 sm:gap-4 max-w-[90vw]"
             >
-              <div className="bg-black text-[#00d2ff] font-black text-xs sm:text-sm px-2 py-0.5 sm:px-2.5 sm:py-1 uppercase -rotate-3 border border-white shrink-0">
+              <div className="bg-[#0B0E14] text-[#00d2ff] font-black text-xs sm:text-sm px-2 py-0.5 sm:px-2.5 sm:py-1 uppercase -rotate-2 border border-white shrink-0">
                 SUARAKAN
               </div>
               <div className="text-xl sm:text-4xl md:text-5xl font-black italic tracking-tighter uppercase drop-shadow-[2px_2px_0px_#000] truncate">
@@ -74,7 +74,7 @@ export default function App() {
               transition={{ delay: 0.25, duration: 0.3 }}
               className="mt-6 font-mono text-xs tracking-widest text-[#00d2ff] uppercase flex items-center gap-2"
             >
-              <span className="w-2 h-2 rounded-full bg-[#0072ff] animate-ping" />
+              <span className="w-2 h-2 rounded-full bg-[#0066FF] animate-ping" />
               <span>SUARAKAN // SISTEM USULAN & ASPIRASI RAHASIA KARYAWAN</span>
             </motion.div>
           </motion.div>
@@ -87,33 +87,12 @@ export default function App() {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.5, duration: 0.5 }}
       >
-        {/* Quick Slanted Role Switcher */}
-        <aside aria-label="Role Switcher" className="fixed bottom-3 right-3 z-50 bg-black border-2 border-white p-1 -rotate-2 shadow-[3px_3px_0px_#0072ff] flex items-center gap-1 font-black text-xs">
-          <span className="text-[#0072ff] px-1.5 select-none tracking-tighter">VIEW:</span>
-          <button
-            onClick={() => navigateTo('employee')}
-            className={`h-7 px-3 uppercase tracking-wider transition-all border ${
-              currentView === 'employee'
-                ? 'bg-[#0072ff] text-white border-white shadow-[2px_2px_0px_#000]'
-                : 'bg-black text-zinc-400 border-zinc-800 hover:text-white'
-            }`}
-          >
-            KARYAWAN
-          </button>
-          <button
-            onClick={() => navigateTo('hr')}
-            className={`h-7 px-3 uppercase tracking-wider transition-all border ${
-              currentView === 'hr'
-                ? 'bg-[#0072ff] text-white border-white shadow-[2px_2px_0px_#000]'
-                : 'bg-black text-zinc-400 border-zinc-800 hover:text-white'
-            }`}
-          >
-            HR CONSOLE (/hr)
-          </button>
-        </aside>
-
         {/* Render selected view */}
-        {currentView === 'hr' ? <HRDashboard /> : <EmployeeApp />}
+        {currentView === 'hr' ? (
+          <HRDashboard navigateTo={navigateTo} currentView={currentView} />
+        ) : (
+          <EmployeeApp navigateTo={navigateTo} currentView={currentView} />
+        )}
       </motion.div>
     </div>
   );

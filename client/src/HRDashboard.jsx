@@ -8,7 +8,7 @@ import {
 } from 'lucide-react';
 import { socket, API_BASE_URL } from './socket';
 
-export default function HRDashboard() {
+export default function HRDashboard({ navigateTo, currentView = 'hr' }) {
   const [suggestions, setSuggestions] = useState([]);
   const [stats, setStats] = useState({ total: 0, submitted: 0, inReview: 0, resolved: 0, rejected: 0 });
   const [loading, setLoading] = useState(true);
@@ -155,25 +155,54 @@ export default function HRDashboard() {
   return (
     <div className="h-screen w-screen bg-[#060c16] text-white flex flex-col font-sans overflow-hidden select-none p5-dots">
       {/* Top Navbar */}
-      <header className="h-14 border-b-4 border-black bg-[#0072ff] px-6 flex items-center justify-between shrink-0 shadow-lg z-20">
+      <header className="h-14 border-b-4 border-[#0B0E14] bg-[#0066FF] px-6 flex items-center justify-between shrink-0 shadow-lg z-20">
         <div className="flex items-center gap-3">
-          <div className="bg-black text-[#00d2ff] px-2.5 py-0.5 text-xs font-black uppercase -rotate-2 border border-white">
+          <div className="bg-[#0B0E14] text-[#00d2ff] px-2.5 py-0.5 text-xs font-black uppercase -rotate-2 border border-white">
             HR CONSOLE
           </div>
-          <span className="font-black text-lg text-black uppercase italic drop-shadow-[1px_1px_0px_#fff]">
+          <span className="font-bold text-xs sm:text-sm tracking-widest text-white uppercase font-mono">
             EVALUATION RADAR // RELOAD
           </span>
         </div>
 
-        <motion.button
-          whileHover={{ scale: 1.05, rotate: -1 }}
-          whileTap={{ scale: 0.95 }}
-          onClick={fetchData}
-          className="h-8 px-3.5 bg-black text-white hover:bg-white hover:text-black font-black text-xs uppercase tracking-wider border-2 border-white flex items-center gap-2 transition-colors shadow-[2px_2px_0px_#000]"
-        >
-          <RefreshCw className="w-3.5 h-3.5" />
-          <span>SYNC DATABASE</span>
-        </motion.button>
+        <div className="flex items-center gap-2">
+          {navigateTo && (
+            <div className="flex items-center bg-[#0B0E14] border-2 border-white p-0.5 -rotate-2 shadow-[2px_2px_0px_#000]">
+              <button
+                type="button"
+                onClick={() => navigateTo('employee')}
+                className={`px-2 sm:px-2.5 py-1 text-[10px] sm:text-xs font-black uppercase tracking-wider transition-all ${
+                  currentView === 'employee'
+                    ? 'bg-[#0066FF] text-white shadow-[1px_1px_0px_#000]'
+                    : 'text-zinc-400 hover:text-white'
+                }`}
+              >
+                KARYAWAN
+              </button>
+              <button
+                type="button"
+                onClick={() => navigateTo('hr')}
+                className={`px-2 sm:px-2.5 py-1 text-[10px] sm:text-xs font-black uppercase tracking-wider transition-all ${
+                  currentView === 'hr'
+                    ? 'bg-[#0066FF] text-white shadow-[1px_1px_0px_#000]'
+                    : 'text-zinc-400 hover:text-white'
+                }`}
+              >
+                HR CONSOLE
+              </button>
+            </div>
+          )}
+
+          <motion.button
+            whileHover={{ scale: 1.05, rotate: -2 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={fetchData}
+            className="h-8 px-3.5 bg-[#0B0E14] text-white hover:bg-white hover:text-[#0B0E14] font-black text-xs uppercase tracking-wider border-2 border-white flex items-center gap-2 transition-colors shadow-[2px_2px_0px_#000] -rotate-2 cursor-pointer"
+          >
+            <RefreshCw className="w-3.5 h-3.5" />
+            <span>SYNC DATABASE</span>
+          </motion.button>
+        </div>
       </header>
 
       {/* 3-Column Persona 3 Cobalt Layout */}
