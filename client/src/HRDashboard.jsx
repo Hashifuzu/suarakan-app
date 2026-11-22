@@ -183,8 +183,8 @@ export default function HRDashboard() {
           <div className="space-y-6">
             {/* Status Filter */}
             <div>
-              <div className="text-xs font-black uppercase tracking-wider text-[#0072ff] mb-2 flex items-center gap-1.5">
-                <span className="w-2 h-2 bg-[#0072ff]"></span> FILTER STATUS
+              <div className="text-xs font-black uppercase tracking-wider text-[#0072ff] mb-2">
+                FILTER STATUS
               </div>
               <div className="space-y-1.5 text-xs">
                 {[
@@ -215,8 +215,8 @@ export default function HRDashboard() {
 
             {/* Category Filter */}
             <div>
-              <div className="text-xs font-black uppercase tracking-wider text-[#0072ff] mb-2 flex items-center gap-1.5">
-                <span className="w-2 h-2 bg-[#0072ff]"></span> KATEGORI BIDANG
+              <div className="text-xs font-black uppercase tracking-wider text-[#0072ff] mb-2">
+                KATEGORI BIDANG
               </div>
               <div className="space-y-1 text-xs">
                 {[

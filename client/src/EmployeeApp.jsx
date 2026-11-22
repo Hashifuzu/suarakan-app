@@ -343,8 +343,8 @@ export default function EmployeeApp() {
               <form onSubmit={handleSubmit} className="space-y-5">
                 {/* 1. Kategori Grid */}
                 <div>
-                  <label className="block text-xs font-black uppercase tracking-widest text-[#0072ff] mb-2 flex items-center gap-1.5">
-                    <span className="w-2 h-2 bg-[#0072ff]"></span> 1. PILIH KATEGORI
+                  <label className="block text-xs font-black uppercase tracking-widest text-[#0072ff] mb-2">
+                    1. PILIH KATEGORI
                   </label>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {CATEGORIES.map((cat, idx) => {
@@ -378,8 +378,8 @@ export default function EmployeeApp() {
 
                 {/* 2. Tingkat Urgensi */}
                 <div>
-                  <label className="block text-xs font-black uppercase tracking-widest text-[#0072ff] mb-2 flex items-center gap-1.5">
-                    <span className="w-2 h-2 bg-[#0072ff]"></span> 2. TINGKAT URGENSI
+                  <label className="block text-xs font-black uppercase tracking-widest text-[#0072ff] mb-2">
+                    2. TINGKAT URGENSI
                   </label>
                   <div className="grid grid-cols-3 gap-2">
                     {URGENCIES.map((u) => {
