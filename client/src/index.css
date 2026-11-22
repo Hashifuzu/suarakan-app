@@ -16,17 +16,17 @@
   background-size: 18px 18px;
 }
 
-/* Animated Flowing Diagonal Stripes */
+/* Animated Flowing Diagonal Stripes - Super Gentle & Subtle */
 .p5-stripes-animated {
   background: repeating-linear-gradient(
     -45deg,
-    rgba(0, 114, 255, 0.04),
-    rgba(0, 114, 255, 0.04) 15px,
-    transparent 15px,
-    transparent 30px
+    rgba(0, 114, 255, 0.025),
+    rgba(0, 114, 255, 0.025) 20px,
+    transparent 20px,
+    transparent 45px
   );
   background-size: 200% 200%;
-  animation: p5-stripe-flow 25s linear infinite;
+  animation: p5-stripe-flow 90s linear infinite;
 }
 
 @keyframes p5-stripe-flow {
