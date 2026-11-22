@@ -4,7 +4,7 @@ import {
   Inbox, CheckCircle2, Clock, AlertTriangle, 
   Search, RefreshCw, Send, Check, XCircle, ChevronDown,
   Filter, MessageSquare, Shield, Tag, ArrowUpRight,
-  Flame, Zap, Trash2
+  Flame, Trash2
 } from 'lucide-react';
 import { socket, API_BASE_URL } from './socket';
 
@@ -385,8 +385,8 @@ export default function HRDashboard() {
               {/* Form Balasan & Tindak Lanjut */}
               <form onSubmit={handleUpdateStatus} className="pt-4 border-t-2 border-zinc-800 space-y-4">
                 <div className="flex items-center justify-between">
-                  <span className="text-sm font-black uppercase text-white flex items-center gap-2">
-                    <Zap className="w-4 h-4 text-[#0072ff]" /> TINDAK LANJUT RESMI HR
+                  <span className="text-sm font-black uppercase text-white">
+                    TINDAK LANJUT RESMI HR
                   </span>
                   {updateNotice && (
                     <span className="text-xs font-mono text-cyan-400 flex items-center gap-1 font-bold">

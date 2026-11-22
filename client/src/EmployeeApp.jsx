@@ -5,7 +5,7 @@ import {
   Send, Search, Copy, Check, Lock, Building2, 
   HeartHandshake, Briefcase, HelpCircle, Inbox,
   ShieldCheck, X, Trash2, CornerDownRight, ArrowLeft,
-  Flame, Zap, AlertTriangle, Sparkles, RefreshCw
+  Flame, AlertTriangle, Sparkles, RefreshCw
 } from 'lucide-react';
 import { socket, API_BASE_URL } from './socket';
 
@@ -230,10 +230,6 @@ export default function EmployeeApp() {
                 SUARA ANDA TELAH TERSAMPAIKAN!
               </div>
 
-              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-[#0072ff] text-black font-black text-xl sm:text-2xl mx-auto flex items-center justify-center border-2 border-white -rotate-6 shadow-[3px_3px_0px_#fff] mb-3">
-                <Zap className="w-7 h-7 sm:w-10 sm:h-10 text-white fill-white animate-bounce" />
-              </div>
-
               <h2 className="text-xl sm:text-3xl font-black uppercase tracking-tighter italic text-white mb-2">
                 ASPIRASI BERHASIL DIKIRIM!
               </h2>
@@ -296,9 +292,8 @@ export default function EmployeeApp() {
               </div>
 
               <div className="mb-4 sm:mb-6 pt-1">
-                <h1 className="text-xl sm:text-3xl font-black uppercase tracking-tighter italic text-white flex items-center gap-2">
-                  <span>SUARAKAN ASPIRASI ANDA</span>
-                  <Zap className="w-5 h-5 sm:w-6 sm:h-6 text-[#0072ff] fill-[#0072ff]" />
+                <h1 className="text-xl sm:text-3xl font-black uppercase tracking-tighter italic text-white">
+                  SUARAKAN ASPIRASI ANDA
                 </h1>
                 <p className="text-zinc-400 text-xs font-medium mt-0.5">
                   Sistem ini tidak merekam IP address maupun identitas Anda. Bebas bersuara demi kemajuan bersama.
