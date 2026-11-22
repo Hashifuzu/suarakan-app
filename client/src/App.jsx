@@ -53,16 +53,16 @@ export default function App() {
           >
             {/* Center Slanted Blue Banner */}
             <motion.div
-              initial={{ x: "-100%", skewX: -20 }}
-              animate={{ x: 0, skewX: -12 }}
-              exit={{ x: "100%", skewX: 20 }}
+              initial={{ x: "-100%", skewX: -12 }}
+              animate={{ x: 0, skewX: -6 }}
+              exit={{ x: "100%", skewX: 12 }}
               transition={{ type: "spring", stiffness: 240, damping: 22 }}
-              className="bg-[#0072ff] text-white border-4 border-white px-8 md:px-16 py-4 shadow-[8px_8px_0px_#000] flex items-center gap-4"
+              className="bg-[#0072ff] text-white border-2 sm:border-4 border-white px-5 sm:px-16 py-3 sm:py-4 shadow-[4px_4px_0px_#000] sm:shadow-[8px_8px_0px_#000] flex items-center gap-2 sm:gap-4 max-w-[90vw]"
             >
-              <div className="bg-black text-[#00d2ff] font-black text-sm px-2.5 py-1 uppercase -rotate-3 border border-white">
+              <div className="bg-black text-[#00d2ff] font-black text-xs sm:text-sm px-2 py-0.5 sm:px-2.5 sm:py-1 uppercase -rotate-3 border border-white shrink-0">
                 SUARAKAN
               </div>
-              <div className="text-3xl md:text-5xl font-black italic tracking-tighter uppercase drop-shadow-[2px_2px_0px_#000]">
+              <div className="text-xl sm:text-4xl md:text-5xl font-black italic tracking-tighter uppercase drop-shadow-[2px_2px_0px_#000] truncate">
                 MEMBUKA RUANG ASPIRASI...
               </div>
             </motion.div>

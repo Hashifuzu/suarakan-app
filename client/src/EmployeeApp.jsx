@@ -169,39 +169,39 @@ export default function EmployeeApp() {
       </div>
 
       {/* TOP BAR: Header SUARAKAN */}
-      <header className="h-16 border-b-4 border-black bg-[#0072ff] px-4 md:px-8 flex items-center justify-between sticky top-0 z-30 shadow-lg">
+      <header className="h-16 border-b-4 border-black bg-[#0072ff] px-3 sm:px-6 md:px-8 flex items-center justify-between sticky top-0 z-30 shadow-lg">
         <motion.div 
-          initial={{ x: -60, opacity: 0 }}
+          initial={{ x: -30, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ type: "spring", stiffness: 260, damping: 20 }}
-          className="flex items-center gap-3"
+          className="flex items-center gap-2 sm:gap-3 overflow-hidden"
         >
-          <div className="bg-black text-[#00d2ff] px-3.5 py-1 font-black text-base uppercase tracking-wider -rotate-3 border-2 border-white shadow-[3px_3px_0px_#000]">
+          <div className="bg-black text-[#00d2ff] px-2.5 sm:px-3.5 py-1 font-black text-xs sm:text-base uppercase tracking-wider -rotate-2 border-2 border-white shadow-[2px_2px_0px_#000] shrink-0">
             SUARAKAN
           </div>
-          <div className="font-black text-sm md:text-base tracking-tight uppercase italic text-black drop-shadow-[1px_1px_0px_#fff]">
+          <div className="hidden sm:block font-black text-xs md:text-sm tracking-tight uppercase italic text-black drop-shadow-[1px_1px_0px_#fff] truncate">
             SISTEM USULAN & ASPIRASI RAHASIA KARYAWAN
           </div>
         </motion.div>
 
-        <div className="flex items-center gap-3">
-          <div className="hidden sm:flex items-center gap-1.5 bg-black text-[#00d2ff] px-2.5 py-1 text-xs font-mono -rotate-1 border border-white/40">
+        <div className="flex items-center gap-2 shrink-0">
+          <div className="hidden md:flex items-center gap-1.5 bg-black text-[#00d2ff] px-2.5 py-1 text-xs font-mono -rotate-1 border border-white/40">
             <ShieldCheck className="w-4 h-4 text-[#0072ff]" />
             <span className="font-bold tracking-wider">ZERO-IP-TRACE</span>
           </div>
 
           {/* Discreet History Button */}
           <motion.button
-            whileHover={{ scale: 1.08, rotate: -2 }}
+            whileHover={{ scale: 1.05, rotate: -2 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => {
               setIsDrawerOpen(true);
               setHasUnread(false);
             }}
-            className="relative px-3.5 py-1.5 bg-black text-white hover:bg-white hover:text-black transition-colors font-black text-xs uppercase tracking-wider border-2 border-white shadow-[3px_3px_0px_#000] flex items-center gap-2"
+            className="relative px-2.5 sm:px-3.5 py-1.5 bg-black text-white hover:bg-white hover:text-black transition-colors font-black text-[11px] sm:text-xs uppercase tracking-wider border-2 border-white shadow-[2px_2px_0px_#000] flex items-center gap-1.5"
           >
-            <Inbox className="w-4 h-4" />
-            <span>RIWAYAT TIKET</span>
+            <Inbox className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+            <span>RIWAYAT</span>
 
             {/* Glowing Unread Dot */}
             {hasUnread && (
@@ -214,68 +214,68 @@ export default function EmployeeApp() {
       </header>
 
       {/* MAIN CONTAINER */}
-      <main className="flex-1 max-w-2xl w-full mx-auto px-4 py-8 md:py-12 flex flex-col justify-center relative z-10">
+      <main className="flex-1 max-w-2xl w-full mx-auto px-3 sm:px-6 py-6 md:py-12 flex flex-col justify-center relative z-10 pb-16">
         <AnimatePresence mode="wait">
           {submittedTicket ? (
             /* SUCCESS CARD STATE */
             <motion.div
               key="success"
-              initial={{ scale: 0.8, rotate: -6, opacity: 0 }}
+              initial={{ scale: 0.9, rotate: -3, opacity: 0 }}
               animate={{ scale: 1, rotate: 0, opacity: 1 }}
-              exit={{ scale: 0.8, rotate: 6, opacity: 0 }}
+              exit={{ scale: 0.9, opacity: 0 }}
               transition={{ type: "spring", stiffness: 300, damping: 22 }}
-              className="bg-black border-4 border-white p-6 md:p-8 p5-shadow relative text-center"
+              className="bg-black border-2 sm:border-4 border-white p-4 sm:p-8 p5-shadow relative text-center"
             >
-              <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-[#0072ff] text-white px-6 py-1 font-black text-xs uppercase tracking-widest -rotate-2 border-2 border-black shadow-[3px_3px_0px_#fff]">
+              <div className="inline-block bg-[#0072ff] text-white px-3 sm:px-6 py-1 font-black text-[10px] sm:text-xs uppercase tracking-widest -rotate-2 border-2 border-black shadow-[2px_2px_0px_#fff] mb-4">
                 SUARA ANDA TELAH TERSAMPAIKAN!
               </div>
 
-              <div className="w-16 h-16 bg-[#0072ff] text-black font-black text-2xl mx-auto flex items-center justify-center border-2 border-white -rotate-6 shadow-[4px_4px_0px_#fff] mb-4">
-                <Zap className="w-10 h-10 text-white fill-white animate-bounce" />
+              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-[#0072ff] text-black font-black text-xl sm:text-2xl mx-auto flex items-center justify-center border-2 border-white -rotate-6 shadow-[3px_3px_0px_#fff] mb-3">
+                <Zap className="w-7 h-7 sm:w-10 sm:h-10 text-white fill-white animate-bounce" />
               </div>
 
-              <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tighter italic text-white mb-2">
+              <h2 className="text-xl sm:text-3xl font-black uppercase tracking-tighter italic text-white mb-2">
                 ASPIRASI BERHASIL DIKIRIM!
               </h2>
-              <p className="text-zinc-400 text-xs md:text-sm max-w-md mx-auto mb-6">
+              <p className="text-zinc-400 text-xs sm:text-sm max-w-md mx-auto mb-5 leading-relaxed">
                 Identitas Anda tetap 100% anonim dan aman. Simpan kode tiket berikut untuk melacak respon manajemen:
               </p>
 
               {/* Secret Token Box */}
               <motion.div 
-                whileHover={{ scale: 1.03 }}
-                className="inline-flex items-center gap-4 bg-[#0072ff] text-white border-2 border-white px-6 py-3 -rotate-1 shadow-[4px_4px_0px_#fff] mb-8"
+                whileHover={{ scale: 1.02 }}
+                className="flex flex-col sm:flex-row items-center justify-center gap-3 bg-[#0072ff] text-white border-2 border-white px-4 sm:px-6 py-3 -rotate-1 shadow-[3px_3px_0px_#fff] mb-6 max-w-sm mx-auto"
               >
-                <span className="font-mono text-2xl font-black tracking-widest drop-shadow-[2px_2px_0px_#000]">
+                <span className="font-mono text-xl sm:text-2xl font-black tracking-widest drop-shadow-[2px_2px_0px_#000]">
                   {submittedTicket.ticket_code}
                 </span>
                 <button
                   onClick={() => copyCode(submittedTicket.ticket_code)}
-                  className="bg-black hover:bg-white hover:text-black text-white px-3 py-1 text-xs font-black uppercase transition-colors border border-white flex items-center gap-1.5"
+                  className="bg-black hover:bg-white hover:text-black text-white px-3 py-1 text-xs font-black uppercase transition-colors border border-white flex items-center gap-1.5 w-full sm:w-auto justify-center"
                 >
                   {copied ? <Check className="w-3.5 h-3.5 text-cyan-300" /> : <Copy className="w-3.5 h-3.5" />}
                   {copied ? 'TERSALIN' : 'SALIN'}
                 </button>
               </motion.div>
 
-              <div className="flex justify-center gap-4">
+              <div className="flex flex-col sm:flex-row justify-center gap-2 sm:gap-4">
                 <motion.button
-                  whileHover={{ scale: 1.05, rotate: -2 }}
+                  whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => {
                     setSelectedTicket(submittedTicket);
                     setIsDrawerOpen(true);
                     setSubmittedTicket(null);
                   }}
-                  className="px-5 py-2.5 bg-white text-black font-black text-xs uppercase tracking-wider border-2 border-black hover:bg-zinc-200 transition-colors shadow-[3px_3px_0px_#0072ff]"
+                  className="px-4 py-2.5 bg-white text-black font-black text-xs uppercase tracking-wider border-2 border-black hover:bg-zinc-200 transition-colors shadow-[2px_2px_0px_#0072ff]"
                 >
                   PANTAU STATUS TIKET
                 </motion.button>
                 <motion.button
-                  whileHover={{ scale: 1.05, rotate: 2 }}
+                  whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => setSubmittedTicket(null)}
-                  className="px-5 py-2.5 bg-[#0072ff] text-white font-black text-xs uppercase tracking-wider border-2 border-white hover:bg-blue-600 transition-colors shadow-[3px_3px_0px_#000]"
+                  className="px-4 py-2.5 bg-[#0072ff] text-white font-black text-xs uppercase tracking-wider border-2 border-white hover:bg-blue-600 transition-colors shadow-[2px_2px_0px_#000]"
                 >
                   KIRIM ASPIRASI LAIN
                 </motion.button>
@@ -285,22 +285,22 @@ export default function EmployeeApp() {
             /* DYNAMIC FORM */
             <motion.div
               key="form"
-              initial={{ y: 40, opacity: 0 }}
+              initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              exit={{ y: -40, opacity: 0 }}
+              exit={{ y: -20, opacity: 0 }}
               transition={{ type: "spring", stiffness: 220, damping: 20 }}
-              className="bg-black border-4 border-white p-6 md:p-8 p5-shadow relative"
+              className="bg-black border-2 sm:border-4 border-white p-4 sm:p-8 p5-shadow relative"
             >
-              <div className="absolute -top-4 -left-2 bg-[#0072ff] text-white px-4 py-1 font-black text-xs tracking-wider uppercase -rotate-3 border-2 border-black shadow-[3px_3px_0px_#fff]">
+              <div className="inline-block bg-[#0072ff] text-white px-2.5 sm:px-4 py-1 font-black text-[10px] sm:text-xs tracking-wider uppercase -rotate-2 border-2 border-black shadow-[2px_2px_0px_#fff] mb-2">
                 SUARAKAN // RUANG ASPIRASI BEBAS
               </div>
 
-              <div className="mb-6 pt-2">
-                <h1 className="text-2xl md:text-3xl font-black uppercase tracking-tighter italic text-white flex items-center gap-2">
+              <div className="mb-4 sm:mb-6 pt-1">
+                <h1 className="text-xl sm:text-3xl font-black uppercase tracking-tighter italic text-white flex items-center gap-2">
                   <span>SUARAKAN ASPIRASI ANDA</span>
-                  <Zap className="w-6 h-6 text-[#0072ff] fill-[#0072ff]" />
+                  <Zap className="w-5 h-5 sm:w-6 sm:h-6 text-[#0072ff] fill-[#0072ff]" />
                 </h1>
-                <p className="text-zinc-400 text-xs font-medium">
+                <p className="text-zinc-400 text-xs font-medium mt-0.5">
                   Sistem ini tidak merekam IP address maupun identitas Anda. Bebas bersuara demi kemajuan bersama.
                 </p>
               </div>
@@ -311,7 +311,7 @@ export default function EmployeeApp() {
                   <label className="block text-xs font-black uppercase tracking-widest text-[#0072ff] mb-2 flex items-center gap-1.5">
                     <span className="w-2 h-2 bg-[#0072ff]"></span> 1. PILIH KATEGORI
                   </label>
-                  <div className="grid grid-cols-2 gap-2">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {CATEGORIES.map((cat, idx) => {
                       const Icon = cat.icon;
                       const active = category === cat.id;
@@ -319,12 +319,12 @@ export default function EmployeeApp() {
                         <motion.button
                           type="button"
                           key={cat.id}
-                          whileHover={{ scale: 1.03, rotate: idx % 2 === 0 ? -1 : 1 }}
-                          whileTap={{ scale: 0.97 }}
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
                           onClick={() => setCategory(cat.id)}
                           className={`p-2.5 text-left border-2 transition-all relative overflow-hidden ${
                             active
-                              ? 'bg-[#0072ff] text-white border-white shadow-[3px_3px_0px_#fff]'
+                              ? 'bg-[#0072ff] text-white border-white shadow-[2px_2px_0px_#fff]'
                               : 'bg-zinc-950 text-zinc-300 border-zinc-800 hover:border-cyan-500'
                           }`}
                         >
@@ -405,16 +405,16 @@ export default function EmployeeApp() {
                   <motion.button
                     type="submit"
                     disabled={isSubmitting}
-                    whileHover={{ scale: 1.02, rotate: -1 }}
+                    whileHover={{ scale: 1.01 }}
                     whileTap={{ scale: 0.98 }}
-                    className="w-full h-13 bg-[#0072ff] hover:bg-blue-600 disabled:opacity-50 text-white font-black text-base uppercase tracking-wider border-2 border-white shadow-[5px_5px_0px_#fff] flex items-center justify-center gap-3 transition-colors"
+                    className="w-full h-12 sm:h-13 bg-[#0072ff] hover:bg-blue-600 disabled:opacity-50 text-white font-black text-xs sm:text-base uppercase tracking-wider border-2 border-white shadow-[3px_3px_0px_#fff] flex items-center justify-center gap-2 sm:gap-3 transition-colors px-2"
                   >
                     {isSubmitting ? (
                       <RefreshCw className="w-5 h-5 animate-spin" />
                     ) : (
                       <>
-                        <span>SUARAKAN SEKARANG (100% ANONIM)</span>
-                        <Send className="w-5 h-5" />
+                        <span className="truncate">SUARAKAN SEKARANG (ANONIM)</span>
+                        <Send className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
                       </>
                     )}
                   </motion.button>
@@ -441,11 +441,11 @@ export default function EmployeeApp() {
             />
 
             <motion.div 
-              initial={{ x: "100%", rotate: 2 }}
-              animate={{ x: 0, rotate: 0 }}
-              exit={{ x: "100%", rotate: 2 }}
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
               transition={{ type: "spring", stiffness: 280, damping: 25 }}
-              className="w-full max-w-md bg-[#0a111e] border-l-4 border-[#0072ff] h-full flex flex-col shadow-2xl relative z-10"
+              className="w-full sm:max-w-md bg-[#0a111e] border-l-2 sm:border-l-4 border-[#0072ff] h-full flex flex-col shadow-2xl relative z-10"
             >
               {/* Drawer Top Header */}
               <div className="h-16 border-b-2 border-zinc-800 bg-black px-5 flex items-center justify-between shrink-0">
