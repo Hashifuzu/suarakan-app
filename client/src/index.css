@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-[#050b14] text-[#f2f7fc] antialiased overflow-x-hidden selection:bg-[#0072ff] selection:text-white;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Impact", sans-serif;
+  }
+}
+
+/* Halftone dot pattern background - Persona 3 Moonlight Blue */
+.p5-dots {
+  background-image: radial-gradient(rgba(0, 114, 255, 0.15) 1.5px, transparent 1.5px);
+  background-size: 16px 16px;
+}
+
+.p5-stripes {
+  background: repeating-linear-gradient(
+    -45deg,
+    rgba(255, 255, 255, 0.03),
+    rgba(255, 255, 255, 0.03) 10px,
+    transparent 10px,
+    transparent 20px
+  );
+}
+
+.p5-stripes-blue {
+  background: repeating-linear-gradient(
+    -45deg,
+    #0072ff,
+    #0072ff 14px,
+    #0055c4 14px,
+    #0055c4 28px
+  );
+}
+
+/* Persona 3 Dynamic Angles */
+.p5-skew-left {
+  transform: skewX(-12deg);
+}
+.p5-unskew-left {
+  transform: skewX(12deg);
+}
+
+.p5-skew-right {
+  transform: skewX(12deg);
+}
+.p5-unskew-right {
+  transform: skewX(-12deg);
+}
+
+/* Stark Blue & Black Box Shadow */
+.p5-shadow {
+  box-shadow: 6px 6px 0px #0072ff;
+}
+
+.p5-shadow-black {
+  box-shadow: 6px 6px 0px #000000;
+}
+
+.p5-shadow-white {
+  box-shadow: 5px 5px 0px #ffffff;
+}
+
+.p5-clip-banner {
+  clip-path: polygon(0% 0%, 100% 0%, 96% 100%, 0% 100%);
+}
