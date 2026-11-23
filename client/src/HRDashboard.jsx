@@ -103,17 +103,30 @@ export default function HRDashboard({ navigateTo, currentView = 'hr' }) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           status: responseStatus,
-          hrResponse: responseText.trim()
+          hrResponse: responseText.trim(),
+          hr_response: responseText.trim()
         })
       });
       const data = await res.json();
-      if (data.success) {
+      if (data.success && data.data) {
         setSelectedTicket(data.data);
+        setSuggestions(prev => prev.map(s => s.ticket_code === data.data.ticket_code ? data.data : s));
+        setResponseText(data.data.hr_response || '');
+        setResponseStatus(data.data.status || responseStatus);
         setUpdateNotice(true);
-        setTimeout(() => setUpdateNotice(false), 2000);
+        setTimeout(() => setUpdateNotice(false), 2500);
+
+        try {
+          const statRes = await fetch(`${API_BASE_URL}/hr/stats`);
+          const statData = await statRes.json();
+          if (statData.success) setStats(statData.data);
+        } catch {}
+      } else {
+        alert(data.error || 'Gagal memperbarui status dan respon');
       }
-    } catch {
-      alert('Gagal memperbarui status');
+    } catch (err) {
+      console.error('Update status error:', err);
+      alert('Gagal mengirim respon HR. Pastikan server backend sedang aktif.');
     } finally {
       setIsUpdating(false);
     }
@@ -419,10 +432,27 @@ export default function HRDashboard({ navigateTo, currentView = 'hr' }) {
                   </span>
                   {updateNotice && (
                     <span className="text-xs font-mono text-cyan-400 flex items-center gap-1 font-bold">
-                      <Check className="w-4 h-4" /> RESPON TERSIMPAN!
+                      <Check className="w-4 h-4" /> RESPON TERSIMPAN & TERKIRIM!
                     </span>
                   )}
                 </div>
+
+                {/* Display Current Response if exists */}
+                {selectedTicket.hr_response && (
+                  <div className="p-3.5 bg-cyan-950/40 border border-cyan-500/50">
+                    <div className="flex items-center justify-between text-xs font-black uppercase text-[#00d2ff] mb-1">
+                      <span>RESPON RESMI TERSIMPAN SAAT INI</span>
+                      {selectedTicket.hr_responded_at && (
+                        <span className="text-[10px] font-mono text-zinc-400">
+                          {new Date(selectedTicket.hr_responded_at).toLocaleString('id-ID')}
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-xs text-zinc-100 leading-relaxed whitespace-pre-wrap font-medium">
+                      {selectedTicket.hr_response}
+                    </p>
+                  </div>
+                )}
 
                 {/* Status Toggle Grid */}
                 <div>

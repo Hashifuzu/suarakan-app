@@ -80,21 +80,26 @@ router.get('/hr/suggestions', (req, res) => {
   }
 });
 
-router.patch('/hr/suggestions/:ticketCode', (req, res) => {
+const handleHRUpdate = (req, res) => {
   try {
     const { ticketCode } = req.params;
-    const { status, hrResponse } = req.body;
+    const { status, hrResponse, hr_response } = req.body;
+    const finalResponse = hrResponse !== undefined ? hrResponse : hr_response;
+
     const existing = db.getSuggestionByTicket(ticketCode);
     if (!existing) {
       return res.status(404).json({ error: 'Tiket tidak ditemukan.' });
     }
-    const updated = db.updateSuggestionStatus(ticketCode, status || existing.status, hrResponse);
+    const updated = db.updateSuggestionStatus(ticketCode, status || existing.status, finalResponse);
     res.json({ success: true, data: updated });
   } catch (err) {
     console.error('Error updating suggestion:', err);
     res.status(500).json({ error: 'Gagal memperbarui saran.' });
   }
-});
+};
+router.patch('/hr/suggestions/:ticketCode', handleHRUpdate);
+router.put('/hr/suggestions/:ticketCode', handleHRUpdate);
+router.post('/hr/suggestions/:ticketCode/response', handleHRUpdate);
 
 router.delete('/hr/suggestions/:ticketCode', (req, res) => {
   try {

@@ -40,6 +40,7 @@ export default function EmployeeApp({ navigateTo, currentView = 'employee' }) {
   const [searchCode, setSearchCode] = useState('');
   const [searchError, setSearchError] = useState('');
   const [isSearching, setIsSearching] = useState(false);
+  const [isRefreshingTicket, setIsRefreshingTicket] = useState(false);
 
   // Local storage history
   const [myTickets, setMyTickets] = useState(() => {
@@ -52,12 +53,83 @@ export default function EmployeeApp({ navigateTo, currentView = 'employee' }) {
   });
 
   const saveTicketToHistory = (item) => {
+    if (!item || !item.ticket_code) return;
     setMyTickets((prev) => {
       const updated = [item, ...prev.filter((t) => t.ticket_code !== item.ticket_code)];
-      localStorage.setItem('anon_my_tickets', JSON.stringify(updated));
+      try {
+        localStorage.setItem('anon_my_tickets', JSON.stringify(updated));
+      } catch {}
       return updated;
     });
   };
+
+  // Sync all saved tickets from server
+  const syncMyTickets = async () => {
+    try {
+      const saved = localStorage.getItem('anon_my_tickets');
+      const tickets = saved ? JSON.parse(saved) : [];
+      if (!tickets || tickets.length === 0) return;
+
+      const freshTickets = await Promise.all(
+        tickets.map(async (t) => {
+          try {
+            const res = await fetch(`${API_BASE_URL}/suggestions/${t.ticket_code}`);
+            const json = await res.json();
+            return json.success && json.data ? json.data : t;
+          } catch {
+            return t;
+          }
+        })
+      );
+      setMyTickets(freshTickets);
+      try {
+        localStorage.setItem('anon_my_tickets', JSON.stringify(freshTickets));
+      } catch {}
+
+      setSelectedTicket((curr) => {
+        if (!curr) return null;
+        const fresh = freshTickets.find((t) => t.ticket_code === curr.ticket_code);
+        return fresh || curr;
+      });
+    } catch (err) {
+      console.error('Failed to sync tickets:', err);
+    }
+  };
+
+  // Fetch single ticket details
+  const fetchTicketDetails = async (ticketCode) => {
+    if (!ticketCode) return;
+    setIsRefreshingTicket(true);
+    try {
+      const res = await fetch(`${API_BASE_URL}/suggestions/${ticketCode.toUpperCase().trim()}`);
+      const data = await res.json();
+      if (data.success && data.data) {
+        setSelectedTicket(data.data);
+        saveTicketToHistory(data.data);
+      }
+    } catch (err) {
+      console.error('Failed to fetch ticket:', err);
+    } finally {
+      setIsRefreshingTicket(false);
+    }
+  };
+
+  const handleSelectTicket = (t) => {
+    setSelectedTicket(t);
+    fetchTicketDetails(t.ticket_code);
+  };
+
+  // Auto-sync on mount
+  useEffect(() => {
+    syncMyTickets();
+  }, []);
+
+  // Auto-sync when drawer opens
+  useEffect(() => {
+    if (isDrawerOpen) {
+      syncMyTickets();
+    }
+  }, [isDrawerOpen]);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -72,19 +144,26 @@ export default function EmployeeApp({ navigateTo, currentView = 'employee' }) {
 
   useEffect(() => {
     const handleUpdate = (updated) => {
-      setMyTickets((prev) =>
-        prev.map((t) => (t.ticket_code === updated.ticket_code ? updated : t))
-      );
-      if (selectedTicket && selectedTicket.ticket_code === updated.ticket_code) {
-        setSelectedTicket(updated);
-      } else {
-        setHasUnread(true);
-      }
+      if (!updated || !updated.ticket_code) return;
+      setMyTickets((prev) => {
+        const next = prev.map((t) => (t.ticket_code === updated.ticket_code ? updated : t));
+        try {
+          localStorage.setItem('anon_my_tickets', JSON.stringify(next));
+        } catch {}
+        return next;
+      });
+      setSelectedTicket((prev) => {
+        if (prev && prev.ticket_code === updated.ticket_code) {
+          return updated;
+        }
+        return prev;
+      });
+      setHasUnread(true);
     };
 
     socket.on('suggestion_updated', handleUpdate);
     return () => socket.off('suggestion_updated', handleUpdate);
-  }, [selectedTicket]);
+  }, []);
 
   const fireP3Confetti = () => {
     confetti({
@@ -327,7 +406,7 @@ export default function EmployeeApp({ navigateTo, currentView = 'employee' }) {
                 <button
                   type="button"
                   onClick={() => {
-                    setSelectedTicket(submittedTicket);
+                    handleSelectTicket(submittedTicket);
                     setIsDrawerOpen(true);
                     setSubmittedTicket(null);
                   }}
@@ -632,9 +711,21 @@ export default function EmployeeApp({ navigateTo, currentView = 'employee' }) {
 
                     {/* Official Response */}
                     <div className="bg-[#050b14] p-4 border-2 border-[#0066FF] space-y-2 relative">
-                      <div className="flex items-center gap-1.5 text-xs font-black uppercase text-[#00d2ff]">
-                        <CornerDownRight className="w-4 h-4" />
-                        <span>RESPON RESMI MANAJEMEN / HR</span>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-1.5 text-xs font-black uppercase text-[#00d2ff]">
+                          <CornerDownRight className="w-4 h-4" />
+                          <span>RESPON RESMI MANAJEMEN / HR</span>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => fetchTicketDetails(selectedTicket.ticket_code)}
+                          disabled={isRefreshingTicket}
+                          className="px-2 py-0.5 bg-[#0066FF] hover:bg-blue-600 text-white text-[10px] font-mono font-bold uppercase flex items-center gap-1 border border-white cursor-pointer"
+                          title="Cek respon terbaru dari HR"
+                        >
+                          <RefreshCw className={`w-3 h-3 ${isRefreshingTicket ? 'animate-spin' : ''}`} />
+                          <span>{isRefreshingTicket ? 'MENGECEK...' : 'CEK RESPON'}</span>
+                        </button>
                       </div>
                       {selectedTicket.hr_response ? (
                         <div>
@@ -703,7 +794,7 @@ export default function EmployeeApp({ navigateTo, currentView = 'employee' }) {
                             key={t.ticket_code}
                             whileHover={{ scale: 1.02, x: 4 }}
                             whileTap={{ scale: 0.98 }}
-                            onClick={() => setSelectedTicket(t)}
+                            onClick={() => handleSelectTicket(t)}
                             className="p-3 bg-[#050b14] border-2 border-zinc-800 hover:border-[#0066FF] cursor-pointer flex items-center justify-between text-xs transition-colors"
                           >
                             <div>

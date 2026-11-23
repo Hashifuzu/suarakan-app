@@ -97,17 +97,18 @@ app.get('/api/hr/suggestions', (req, res) => {
 });
 
 // 4. HR updates status or provides official feedback
-app.patch('/api/hr/suggestions/:ticketCode', (req, res) => {
+const handleUpdateHR = (req, res) => {
   try {
     const { ticketCode } = req.params;
-    const { status, hrResponse } = req.body;
+    const { status, hrResponse, hr_response } = req.body;
+    const finalResponse = hrResponse !== undefined ? hrResponse : hr_response;
 
     const existing = db.getSuggestionByTicket(ticketCode);
     if (!existing) {
       return res.status(404).json({ error: 'Tiket tidak ditemukan.' });
     }
 
-    const updated = db.updateSuggestionStatus(ticketCode, status || existing.status, hrResponse);
+    const updated = db.updateSuggestionStatus(ticketCode, status || existing.status, finalResponse);
 
     io.emit('suggestion_updated', updated);
     io.emit(`ticket_${ticketCode}_updated`, updated);
@@ -118,7 +119,10 @@ app.patch('/api/hr/suggestions/:ticketCode', (req, res) => {
     console.error('Error updating suggestion:', err);
     res.status(500).json({ error: 'Gagal memperbarui saran.' });
   }
-});
+};
+app.patch('/api/hr/suggestions/:ticketCode', handleUpdateHR);
+app.put('/api/hr/suggestions/:ticketCode', handleUpdateHR);
+app.post('/api/hr/suggestions/:ticketCode/response', handleUpdateHR);
 
 // 5. HR deletes a suggestion
 app.delete('/api/hr/suggestions/:ticketCode', (req, res) => {
